@@ -1,7 +1,4 @@
 class Client
-  #basic properties
-  # attr_accessor :name, :age, :number_of_children, :number_of_pets = number_of_pets
-  attr_reader :output_message
 
   # initialize instance variables
   def initialize(name="", age=0, number_of_children=0)
@@ -9,9 +6,39 @@ class Client
     @name = name
     @age = age
     @number_of_children = number_of_children
-    # @number_of_pets = number_of_pets
+    # create an empty array to store adopted
+    @pets = []   
+  end
 
-    @output_message = "Created a new client."
+  # Method to show number of pets, based on how many pets are in pet list
+  def number_of_pets
+    @pets.count
+  end
+
+  # Method to prompt, collect, and assign client info to current client obj
+  def get_new_client_info
+    print("Please enter name: ")
+    @name = gets.chomp
+
+    print("Enter age: ")
+    @age = gets.chomp.to_i
+
+    print("Enter number of children: ")
+    @number_of_children = gets.chomp.to_i
+  end
+
+  # Method to display client info (attributes) of current client obj
+  def formatted_client_display_info
+    output_info = []
+    output_info << "Name: #{@name}"
+    output_info << "Age: #{@age}"
+    output_info << "Number of children: #{@number_of_children}"
+    output_info << "Number of pets: #{self.number_of_pets}"
+    if self.number_of_pets > 0
+      output_info << "Pets: "
+      # pets.each { |pet| print("#{pet.name} ")}  # TODO implement pet display info
+    end
+    return output_info
   end
 
 end

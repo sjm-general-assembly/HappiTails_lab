@@ -10,7 +10,8 @@ controller_options = {
   "2" => "Display all clients",
   "3" => "Add an animal",
   "4" => "Add a client",
-  "5" => "Animal adoption"
+  "5" => "Animal adoption",
+  "6" => "Put up for adoption"
 }
 
 # A menu method, that displays menu options, a header message,
@@ -55,23 +56,26 @@ output_messages = []
 
   case choice
   when "1"
-    output_messages = shelter.formatted_animal_list
+    output_messages = shelter.formatted_animal_list()
 
   when "2"
-    output_messages = shelter.formatted_client_list
+    output_messages = shelter.formatted_client_list()
 
   when "3" 
     new_animal = Animal.new
-    new_animal.get_new_animal_info
+    new_animal.get_new_animal_info()
     output_messages = shelter.add_animal(new_animal)
 
   when "4"    
     new_client = Client.new
-    new_client.get_new_client_info
+    new_client.get_new_client_info()
     output_messages = shelter.add_client(new_client)
 
   when "5"
-    output_messages = shelter.process_adoption
+    output_messages = shelter.process_adoption()
+
+  when "6"
+    output_messages = shelter.accept_for_adoption()
 
   else
     output_messages << "Invalid option. Try again."

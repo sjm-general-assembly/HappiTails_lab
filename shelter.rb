@@ -62,7 +62,7 @@ class Shelter
     return output_strings
   end
 
-  # Method to find a valid client, return that object
+  # Method to find a valid/existing client, return that object
   def get_input_valid_client
       
       adopting_client_name = "" 
@@ -77,10 +77,26 @@ class Shelter
 
       return @clients[adopting_client_name.to_sym]
   end
+
+  # Method to find a valid/existing animal, return that object
+  def get_input_valid_animal
+      
+      adopting_animal_name = "" 
+      print("Enter animal name: ")
+      adopting_animal_name = gets.chomp
+
+      while @animals[adopting_animal_name.to_sym].nil?
+        puts("That animal not found. Please try again.")
+        print("Enter animal name: ")
+        adopting_animal_name = gets.chomp
+      end
+
+      return @animals[adopting_animal_name.to_sym]
+  end
     
   # Method to prompt and collect valid info needed to
   # complete an adoption (client name, pet name)
-  def get_adoption_info
+  def process_adoption
 
     output_strings = []
     # Check to see if there are any pets available to adopt and clients added.
@@ -93,8 +109,14 @@ class Shelter
       # collection info needed to adopt
       puts("-- Collect Adoption Information --")
       adopting_client = get_input_valid_client
+      animal_to_adopt = get_input_valid_animal
 
-      output_strings << "#{adopting_client.name}'s adoption in progress."
+      # add the pet to the client, and remove from shelter animal list
+      # we know at this point, both exist
+      @clients[adopting_client.name.to_sym].add_pet(animal_to_adopt)
+      @animals.delete(animal_to_adopt.name.to_sym)
+
+      output_strings << "#{adopting_client.name} has provided a new home for #{animal_to_adopt.name}!"
     end
   end
   

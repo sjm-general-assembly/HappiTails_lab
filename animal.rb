@@ -1,7 +1,7 @@
 class Animal
 
   # make these attributes available to be seen
-  attr_reader :name
+  attr_reader :name, :age, :gender, :species, :toys
 
   # initialize instance variables
   def initialize(name="", age=0, gender="", species="", toys="")

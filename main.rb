@@ -71,7 +71,7 @@ output_messages = []
     output_messages = shelter.add_client(new_client)
 
   when "5"
-    output_messages = shelter.get_adoption_info
+    output_messages = shelter.process_adoption
 
   else
     output_messages << "Invalid option. Try again."

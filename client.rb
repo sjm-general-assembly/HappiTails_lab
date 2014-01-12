@@ -1,5 +1,8 @@
 class Client
 
+  # make these attributes available to be seen
+  attr_reader :name
+
   # initialize instance variables
   def initialize(name="", age=0, number_of_children=0)
     #implement

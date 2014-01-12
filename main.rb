@@ -1,14 +1,16 @@
 require './animal'
 require './shelter'
 require './client'
+require 'pry'
 
 shelter = Shelter.new("HappiTails Shelter")
 
 controller_options = {
-  "1" => "Create an animal.",
-  "2" => "Create a client.",
-  "3" => "Display all clients",
-  "4" => "Display all animals"
+  "1" => "Display all animals",
+  "2" => "Display all clients",
+  "3" => "Add an animal",
+  "4" => "Add a client",
+  "5" => "Animal adoption"
 }
 
 # A menu method, that displays menu options, a header message,
@@ -52,23 +54,26 @@ while choice != 'q'
 output_messages = []
 
   case choice
-  when "1" 
+  when "1"
+    output_messages = shelter.formatted_animal_list
+
+  when "2"
+    output_messages = shelter.formatted_client_list
+
+  when "3" 
     new_animal = Animal.new
     new_animal.get_new_animal_info
     shelter.add_animal(new_animal)
-    output_messages << "New animal created and added."
+    output_messages << "New animal #{new_animal.name}  added."
 
-  when "2"    
+  when "4"    
     new_client = Client.new
     new_client.get_new_client_info
     shelter.add_client(new_client)
-    output_messages << "New client created and added."
+    output_messages << "New client #{new_client.name} added."
 
-  when "3"
-    output_messages = shelter.formatted_client_list
-
-  when "4"
-    output_messages = shelter.formatted_animal_list
+  when "5"
+    output_messages = shelter.get_adoption_info
 
   else
     output_messages << "Invalid option. Try again."

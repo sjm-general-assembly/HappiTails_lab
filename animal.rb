@@ -1,7 +1,10 @@
 class Animal
 
+  # make these attributes available to be seen
+  attr_reader :name
+
   # initialize instance variables
-  def initialize(name="", age=0, gender="", species="", toys=[])
+  def initialize(name="", age=0, gender="", species="", toys="")
     #implement
     @name = name
     @age = age

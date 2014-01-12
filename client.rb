@@ -56,7 +56,7 @@ class Client
       print("Enter pet name: ")
       selected_pet = gets.chomp
 
-      while @pets[selected_pet.to_sym].member? != true
+      until @pets.member?(selected_pet.to_sym) do
         puts("That pet not found. Please try again.")
         print("Enter pet name: ")
         selected_pet = gets.chomp

@@ -136,6 +136,11 @@ class Shelter
       else
         # at this point, we know we have a valid client, who does have at least 1 pet.
         current_pet = adopting_client.turnover_pet()   # returns chosen pet, and pet is removed from client list
+
+        # add pet to shelter animal list
+        # note, not capturing the output string (return val) from this method call. -keeps display less cluttered.
+        add_animal(current_pet)                         
+        
         output_strings << "#{adopting_client.name} has given #{current_pet.name} to the shelter, to find a better home."
       end
     end

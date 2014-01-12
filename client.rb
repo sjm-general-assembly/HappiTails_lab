@@ -48,8 +48,7 @@ class Client
     return output_info
   end
 
-
- # Method to find a valid/existing animal, return that object
+ # Method to find a valid/existing pet of a client, return that object
   def choose_pet
       
       selected_pet = "" 
@@ -68,6 +67,8 @@ class Client
   # Method to select pet (choose a pet of client), and remove from client pet list
   def turnover_pet
     selected_pet = choose_pet()
+    @pets.delete(selected_pet.name.to_sym)   # remove the pet from clients pet list
+
     return selected_pet
   end
 

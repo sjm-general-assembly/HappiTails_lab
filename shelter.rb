@@ -14,7 +14,7 @@ class Shelter
     @animals = []
   end
 
-  # Method to add an newly created client to shelter client list
+  # Method to add a newly created client to shelter client list
   def add_client(new_client)
     @clients.push(new_client)
   end
@@ -26,16 +26,26 @@ class Shelter
       output_strings << "No clients to display."
     else
       output_strings << "---- Client List ----"
-      @clients.each do |client|
-      client_output = client.formatted_client_display_info
-            binding.pry
-      output_strings += client_output
-      end
+      @clients.each { |client| output_strings += client.formatted_client_display_info }
     end
     return output_strings
   end
 
-  # def add_animal
-  # end
+  # Method to add a newly created animal to shelter animal list
+  def add_animal(new_animal)
+    @animals.push(new_animal)
+  end
+
+  # Method to format an output string of all current animals of shelter
+  def formatted_animal_list
+    output_strings = []
+    if @animals.count == 0
+      output_strings << "No animals to display."
+    else
+      output_strings << "---- Animal List ----"
+      @animals.each { |animal| output_strings += animal.formatted_animal_display_info }
+    end
+    return output_strings
+  end
 
 end

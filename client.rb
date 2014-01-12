@@ -30,14 +30,16 @@ class Client
   # Method to display client info (attributes) of current client obj
   def formatted_client_display_info
     output_info = []
-    output_info << "Name: #{@name}"
-    output_info << "Age: #{@age}"
-    output_info << "Number of children: #{@number_of_children}"
-    output_info << "Number of pets: #{self.number_of_pets}"
+    output_info << "Name:     #{@name}"
+    output_info << "Age:      #{@age}"
+    output_info << "Children: #{@number_of_children}"
+    output_info << "Pets:     #{self.number_of_pets}"
     if self.number_of_pets > 0
       output_info << "Pets: "
       # pets.each { |pet| print("#{pet.name} ")}  # TODO implement pet display info
     end
+    # add a blank line
+    output_info << " "
     return output_info
   end
 

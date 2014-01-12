@@ -7,7 +7,8 @@ shelter = Shelter.new("HappiTails Shelter")
 controller_options = {
   "1" => "Create an animal.",
   "2" => "Create a client.",
-  "3" => "Display all clients"
+  "3" => "Display all clients",
+  "4" => "Display all animals"
 }
 
 # A menu method, that displays menu options, a header message,
@@ -54,7 +55,8 @@ output_messages = []
   when "1" 
     new_animal = Animal.new
     new_animal.get_new_animal_info
-    output_messages << "New animal created."
+    shelter.add_animal(new_animal)
+    output_messages << "New animal created and added."
 
   when "2"    
     new_client = Client.new
@@ -64,6 +66,9 @@ output_messages = []
 
   when "3"
     output_messages = shelter.formatted_client_list
+
+  when "4"
+    output_messages = shelter.formatted_animal_list
 
   else
     output_messages << "Invalid option. Try again."

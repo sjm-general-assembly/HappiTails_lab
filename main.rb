@@ -63,14 +63,12 @@ output_messages = []
   when "3" 
     new_animal = Animal.new
     new_animal.get_new_animal_info
-    shelter.add_animal(new_animal)
-    output_messages << "New animal #{new_animal.name}  added."
+    output_messages = shelter.add_animal(new_animal)
 
   when "4"    
     new_client = Client.new
     new_client.get_new_client_info
-    shelter.add_client(new_client)
-    output_messages << "New client #{new_client.name} added."
+    output_messages = shelter.add_client(new_client)
 
   when "5"
     output_messages = shelter.get_adoption_info

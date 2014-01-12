@@ -10,17 +10,17 @@ class Client
     @age = age
     @number_of_children = number_of_children
     # create an empty array to store adopted animal (clients new pets!)
-    @pets = []   
+    @pets = {}   
   end
-
-  # # Method to show number of pets, based on how many pets are in pet list
-  # def number_of_pets
-  #   @pets.count
-  # end
 
   # Method to add a new pet to this client
   def add_pet(pet)
-    @pets.push(pet)
+    @pets[pet.name.to_sym] = pet
+  end
+
+  # Convenience Method, to provide number of pets
+  def number_of_pets
+    @pets.keys.count
   end
 
   # Method to prompt, collect, and assign client info to current client obj
@@ -41,11 +41,34 @@ class Client
     output_info << "Name:     #{@name}"
     output_info << "Age:      #{@age}"
     output_info << "Children: #{@number_of_children}"
-    output_info << "Pets:     #{@pets.count}"
-    @pets.each { |pet| output_info << "   #{pet.name} is #{pet.age}, and likes to play with #{pet.toys}." }
+    output_info << "Pets:     #{self.number_of_pets}"
+    @pets.each { |k, pet| output_info << "   #{pet.name} is #{pet.age}, and likes to play with... #{pet.toys}" }
     # add a blank line
     output_info << " "
     return output_info
+  end
+
+
+ # Method to find a valid/existing animal, return that object
+  def choose_pet
+      
+      selected_pet = "" 
+      print("Enter pet name: ")
+      selected_pet = gets.chomp
+
+      while @pets[selected_pet.to_sym].member? != true
+        puts("That pet not found. Please try again.")
+        print("Enter pet name: ")
+        selected_pet = gets.chomp
+      end
+
+      return @pets[selected_pet.to_sym]
+  end
+
+  # Method to select pet (choose a pet of client), and remove from client pet list
+  def turnover_pet
+    selected_pet = choose_pet()
+    return selected_pet
   end
 
 end

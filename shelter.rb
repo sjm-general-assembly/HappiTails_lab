@@ -25,7 +25,7 @@ class Shelter
     end
   end
 
-  # Method to format an output string of all current clients of shelter
+  # Method to format a list of output strings, of all current clients of shelter
   def formatted_client_list
     output_strings = []
     if @clients.empty?
@@ -63,7 +63,7 @@ class Shelter
   end
 
   # Method to find a valid/existing client, return that object
-  def get_input_valid_client
+  def input_valid_client
       
       adopting_client_name = "" 
       print("Enter client name: ")
@@ -79,7 +79,7 @@ class Shelter
   end
 
   # Method to find a valid/existing animal, return that object
-  def get_input_valid_animal
+  def input_valid_animal
       
       adopting_animal_name = "" 
       print("Enter animal name: ")
@@ -94,8 +94,7 @@ class Shelter
       return @animals[adopting_animal_name.to_sym]
   end
     
-  # Method to prompt and collect valid info needed to
-  # complete an adoption (client name, pet name)
+  # Method to complete an adoption (client name, pet name)
   def process_adoption
 
     output_strings = []
@@ -108,8 +107,8 @@ class Shelter
     else
       # collection info needed to adopt
       puts("-- Collect Adoption Information --")
-      adopting_client = get_input_valid_client
-      animal_to_adopt = get_input_valid_animal
+      adopting_client = input_valid_client()
+      animal_to_adopt = input_valid_animal()
 
       # add the pet to the client, and remove from shelter animal list
       # we know at this point, both exist
@@ -117,6 +116,28 @@ class Shelter
       @animals.delete(animal_to_adopt.name.to_sym)
 
       output_strings << "#{adopting_client.name} has provided a new home for #{animal_to_adopt.name}!"
+    end
+  end
+
+  # Method to process receiving an animal for adoption.
+  def accept_for_adoption
+  
+    output_strings = []
+    # Check to see if there are any clients  
+    if @clients.empty?
+      output_strings << "There are no clients. In order to put up an animal for adoption, person must be a client first."
+    else
+      # collection info needed to adopt  (name of client, and pet)
+      puts("-- Collect Adoption Information --")
+      adopting_client = input_valid_client()
+
+      if adopting_client.number_of_pets == 0
+        output_strings << "#{adopting_client.name} does not have any pets to give..."
+      else
+        # at this point, we know we have a valid client, who does have at least 1 pet.
+        current_pet = adopting_client.turnover_pet()   # returns chosen pet, and pet is removed from client list
+        output_strings << "#{adopting_client.name} has given #{current_pet.name} to the shelter, to find a better home."
+      end
     end
   end
   

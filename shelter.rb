@@ -1,6 +1,10 @@
+require './animal'
+require './client'
 require 'pry'
 
 class Shelter
+
+  attr_reader :name
 
   # initialize instance variables
   def initialize(shelter_name="")
@@ -15,8 +19,12 @@ class Shelter
   end
 
   # Method to add a newly created client to shelter client list
-  def add_client(new_client)
+  def add_new_client()
     output_strings = []
+
+    new_client = Client.new
+    new_client.get_new_client_info()
+
     if @clients[new_client.name.to_sym].nil?
       @clients[new_client.name.to_sym] = new_client
       output_strings << "New client #{new_client.name} added."
@@ -38,16 +46,23 @@ class Shelter
   end
 
   # Method to add a newly created animal to shelter animal list
-  def add_animal(new_animal)
+  def add_animal(animal)
     output_strings = []
 
     # add animal if it doesn't exist yet
-    if @animals[new_animal.name.to_sym].nil?
-      @animals[new_animal.name.to_sym] = new_animal
-      output_strings << "New animal #{new_animal.name} added."
+    if @animals[animal.name.to_sym].nil?
+      @animals[animal.name.to_sym] = animal
+      output_strings << "New animal #{animal.name} added."
     else
       output_strings << "That animal already exists. Not adding again."
     end
+  end
+
+  def add_new_animal
+    animal = Animal.new
+    animal.get_new_animal_info()
+
+    add_animal(animal)
   end
 
   # Method to format an output string of all current animals of shelter

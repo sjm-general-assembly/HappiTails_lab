@@ -42,53 +42,21 @@ class Controller
   # Method that takes a menu hash, and processes user input
   def start(working_object)
 
-    output_messages = []
-    choice = menu(output_messages, working_object.name)
+    choice = nil
+    until choice == 'q'
 
-    # process user commands, until user enters quit command 'q'
-    while choice != 'q'
+      output_messages = []
+      choice = menu(output_messages, working_object.name)
 
-    output_messages = []
-
-      case choice
-      when "1"
-        output_messages = working_object.formatted_animal_list()
-
-      when "2"
-        output_messages = working_object.formatted_client_list()
-
-      when "3" 
-        output_messages = working_object.add_new_animal()
-
-      when "4"    
-        output_messages = working_object.add_new_client()
-
-      when "5"
-        output_messages = working_object.process_adoption()
-
-      when "6"
-        output_messages = working_object.accept_for_adoption()
-
+      if @menu_options.member?(choice.to_sym)
+        working_object.send @menu_options[choice][1]
       else
         output_messages << "Invalid option. Try again."
       end
-      
-      choice = menu(output_messages, working_object.name)
-    end
+    end    
 
   end
 
-  # choice = nil
-  # until choice == 'q'
-
-  #   output_messages = []
-  #   choice = menu(output_messages, working_object.name)
-
-  #   if @menu_options.member?(choice.to_sym)
-  #     yield(@menu_options[choice.to_sym].block)
-  #   else
-  #       output_messages << "Invalid option. Try again."
-  #   end
-  # end
+  
 
 end
